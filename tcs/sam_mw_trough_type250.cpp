@@ -96,6 +96,7 @@ enum{
 	P_MC_BAL_HOT,
 	P_MC_BAL_COLD,
 	P_MC_BAL_SCA,
+	P_JOINT_TYPE, //flex hose=0, ball joint=1
 
 	P_OPTCHARTYPE,
 	P_COLLECTORTYPE,
@@ -255,6 +256,7 @@ tcsvarinfo sam_mw_trough_type250_variables[] = {
 	{ TCS_PARAM,          TCS_NUMBER,        P_MC_BAL_HOT,             "mc_bal_hot",                               "The heat capacity of the balance of plant on the hot side",   "kWht/K-MWt",             "",             "",          "0.2" },
 	{ TCS_PARAM,          TCS_NUMBER,       P_MC_BAL_COLD,            "mc_bal_cold",                              "The heat capacity of the balance of plant on the cold side",   "kWht/K-MWt",             "",             "",          "0.2" },
 	{ TCS_PARAM,          TCS_NUMBER,        P_MC_BAL_SCA,             "mc_bal_sca",                        "Non-HTF heat capacity associated with each SCA - per meter basis",      "Wht/K-m",             "",             "",          "4.5" },
+	{ TCS_PARAM,          TCS_NUMBER,        P_JOINT_TYPE,             "joint_type",                                     "Joint type for HCE connections; 0=flex hose, 1=ball",         "none",             "",             "",            "0" },
 
 	{ TCS_PARAM,           TCS_ARRAY,       P_OPTCHARTYPE,            "OptCharType",                                                    "The optical characterization method ",         "none",             "",             "",      "1,1,1,1" },
 	{ TCS_PARAM,           TCS_ARRAY,     P_COLLECTORTYPE,          "CollectorType",                                                "{1=user defined, 2=LS-2, 3=LS-3, 4=IST} ",         "none",             "",             "",      "1,1,1,1" },
@@ -387,6 +389,7 @@ private:
 	int nColt;		//Number of collector types
 	int nHCEVar;		//Number of HCE variants per type
 	int nLoops;		//Number of loops in the field
+	int joint_type; //HCE connection joint type
 	double eta_pump;		//HTF pump efficiency
 	double HDR_rough;		//Header pipe roughness
 	double theta_stow;		//stow angle
@@ -666,6 +669,7 @@ public:
 		nColt	= -1;
 		nHCEVar	= -1;
 		nLoops	= -1;
+		joint_type = -1;
 		eta_pump	= std::numeric_limits<double>::quiet_NaN();
 		HDR_rough	= std::numeric_limits<double>::quiet_NaN();
 		theta_stow	= std::numeric_limits<double>::quiet_NaN();
@@ -1003,6 +1007,7 @@ public:
 		mc_bal_hot = value(P_MC_BAL_HOT);		//The heat capacity of the balance of plant on the hot side [kWht/K-MWt]
 		mc_bal_cold = value(P_MC_BAL_COLD);		//The heat capacity of the balance of plant on the cold side [kWht/K-MWt]
 		mc_bal_sca = value(P_MC_BAL_SCA);		//Non-HTF heat capacity associated with each SCA - per meter basis [Wht/K-m]
+		joint_type = value(P_JOINT_TYPE);		//HCE joint type
 
 		OptCharType = value(P_OPTCHARTYPE, &nval_OptCharType);		//The optical characterization method  [none]
 		CollectorType = value(P_COLLECTORTYPE, &nval_CollectorType);		//{1=user defined, 2=LS-2, 3=LS-3, 4=IST}  [none]

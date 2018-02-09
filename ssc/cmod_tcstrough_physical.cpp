@@ -102,7 +102,8 @@ static var_info _cm_vtab_tcstrough_physical[] = {
     { SSC_INPUT,        SSC_NUMBER,      "mc_bal_hot",                "Heat capacity of the balance of plant on the hot side",                            "kWht/K-MWt",   "none",           "solar_field",    "*",                       "",                      "" },
     { SSC_INPUT,        SSC_NUMBER,      "mc_bal_cold",               "Heat capacity of the balance of plant on the cold side",                           "kWht/K-MWt",   "",               "solar_field",    "*",                       "",                      "" },
     { SSC_INPUT,        SSC_NUMBER,      "mc_bal_sca",                "Non-HTF heat capacity associated with each SCA - per meter basis",                 "Wht/K-m",      "",               "solar_field",    "*",                       "",                      "" },
-                                                                                                                                                             
+	{ SSC_INPUT,        SSC_NUMBER,      "joint_type",                "HCE joint type",																      "",             "",               "solar_field",    "*",                       "",                      "" },
+
     { SSC_INPUT,        SSC_ARRAY,       "W_aperture",                "The collector aperture width (Total structural area used for shadowing)",          "m",            "",             "solar_field",    "*",                       "",                      "" },
     { SSC_INPUT,        SSC_ARRAY,       "A_aperture",                "Reflective aperture area of the collector",                                        "m2",           "",             "solar_field",    "*",                       "",                      "" },
     { SSC_INPUT,        SSC_ARRAY,       "TrackingError",             "User-defined tracking error derate",                                               "none",         "",             "solar_field",    "*",                       "",                      "" },
@@ -530,7 +531,8 @@ public:
         set_unit_value_ssc_double(type250_solarfield, "solar_mult" ); // , 2);
         set_unit_value_ssc_double(type250_solarfield, "mc_bal_hot" ); // , 0.2);
         set_unit_value_ssc_double(type250_solarfield, "mc_bal_cold" ); // , 0.2);
-        set_unit_value_ssc_double(type250_solarfield, "mc_bal_sca" ); // , 4.5);
+		set_unit_value_ssc_double(type250_solarfield, "mc_bal_sca"); // , 4.5);
+		set_unit_value_ssc_double(type250_solarfield, "joint_type" ); 
         //set_unit_value_ssc_array(type250_solarfield, "OptCharType" ); // , [1,1,1,1]);
         //set_unit_value_ssc_array(type250_solarfield, "CollectorType" ); // , [1,1,1,1]);
         set_unit_value_ssc_array(type250_solarfield, "W_aperture" ); // , [5,5,5,5]);
